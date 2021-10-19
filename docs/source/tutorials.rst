@@ -139,7 +139,6 @@ mutually inclined orbits. For the purposes of this tutorial we assume edge-on co
 orbits (i=90, Ω=0) for consistency with the unperturbed Keplerian frame and in order to work with minimum
 dynamical masses.
 
-.. image:: 
 
 ------------------------------------------------------------------------------------------
 
