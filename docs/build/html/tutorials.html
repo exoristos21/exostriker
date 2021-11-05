@@ -50,11 +50,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#adding-the-rv-data">Adding the RV data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#fitting-the-rv-data">Fitting the RV data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#performing-an-orbital-evolution">Performing an orbital evolution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multiplanetary-systems">Multiplanetary systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mcmc">MCMC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performing-an-orbital-evolution">Performing an orbital evolution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#obtaining-the-best-fit-parameters-uncertainties">Obtaining the best fit parameters uncertainties</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#adding-the-transit-data">Adding the Transit data</a></li>
 </ul>
 <p class="caption"><span class="caption-text">tutorials based on Jupyter shell</span></p>
 <ul>
@@ -119,8 +120,8 @@ homepage of exostriker.</p>
 <li><p><strong>Dynamical</strong>: a dynamical analysis is performed on the data.</p></li>
 <li><p><strong>Initialize</strong>: ?</p></li>
 <li><p><strong>Fit</strong>: optimization parameter, fixes the offsets of the datasets.</p></li>
-<li><p><strong>Run MCMC</strong>: runs Monte Carlo simulations.</p></li>
-<li><p><strong>Run Nest.samp</strong>: generates samples using the Nested sampling alogithm.</p></li>
+<li><p>Run <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a> : runs Markov chain Monte Carlo simulations.</p></li>
+<li><p>Run <a class="reference external" href="https://arxiv.org/abs/2101.09675">Nest.samp</a> : generates samples using the Nested sampling alogithm.</p></li>
 <li><p><strong>Run orbital evolution</strong>: runs an orbital evolution to your data.</p></li>
 <li><p><strong>RV auto fit</strong>: a curve is applied to data.</p></li>
 </ul>
@@ -136,8 +137,8 @@ homepage of exostriker.</p>
 <li><p><strong>ώ [deg/yr]</strong>: ?</p></li>
 <li><p><strong>t</strong><sub>0</sub><strong>[d]</strong>: ?</p></li>
 <li><p><strong>R</strong><sub>pl</sub>/<strong>R</strong><sub>*</sub>: planets radius to stars radius ratio.</p></li>
-<li><p><strong>a</strong><sub>pl</sub>/<strong>R</strong><sub>*</sub>: planets distance to stars radius ratio.</p></li>
-<li><p><strong>a [au]</strong>: planets distance from the central star.</p></li>
+<li><p><strong>a</strong><sub>pl</sub>/<strong>R</strong><sub>*</sub>: semimajor axis to stars radius ratio.</p></li>
+<li><p><strong>a [au]</strong>: semimajor axis.</p></li>
 <li><p><strong>m</strong> [<strong>M</strong><sub>jup</sub>] : planets mass.</p></li>
 <li><p><strong>t</strong><sub>ω</sub>[<strong>d</strong>]: ?</p></li>
 </ul>
@@ -186,18 +187,6 @@ a planet is included in the analysis.</p>
 obtained the <em>best Keplerian fit</em> of your model.</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="performing-an-orbital-evolution">
-<h2>Performing an orbital evolution<a class="headerlink" href="#performing-an-orbital-evolution" title="Permalink to this headline"></a></h2>
-<p>At this point we can perform an orbital evolution in order to notice how
-the orbital parameters develop with time.</p>
-<img alt="_images/1orbitalevo.gif" src="_images/1orbitalevo.gif" />
-<p>First the stellar parameters need to be distinguished, by changing the values
-of <em>Stellar param.</em> on the bottom left panel. Then add the maximum time of evolution
-by clicking at <em>N-body</em>. Run orbital evolution (<em>Run orb. evol</em>) and you will be
-transfered automatically to the <em>Orb. Evol</em> panel, where you can see how the orbital parameters
-evolve with time.</p>
-</div>
-<hr class="docutils" />
 <div class="section" id="multiplanetary-systems">
 <h2>Multiplanetary systems<a class="headerlink" href="#multiplanetary-systems" title="Permalink to this headline"></a></h2>
 <p>In case of <em>multiplanetary systems</em> it is kind to consider the planet masses and distances from each other (close orbits).
@@ -214,27 +203,86 @@ mutually inclined orbits. For the purposes of this tutorial we assume edge-on co
 orbits (i=90, Ω=0) for consistency with the unperturbed Keplerian frame and in order to work with minimum
 dynamical masses.</p>
 <p>The difference in the phase diagrams between the two models is significant!</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="performing-an-orbital-evolution">
+<h2>Performing an orbital evolution<a class="headerlink" href="#performing-an-orbital-evolution" title="Permalink to this headline"></a></h2>
+<p>At this point we can perform an orbital evolution, using the SyMBA N-body
+symplectic integrator, in order to notice how the orbital parameters develop with time.</p>
 <div class="figure align-default" id="id2">
+<img alt="_images/1orbitalevo.gif" src="_images/1orbitalevo.gif" />
+<p class="caption"><span class="caption-text">Running an <em>orbital evolution</em> with Keplerian model.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</div>
+<p>First the stellar parameters need to be distinguished, by changing the values
+of <em>Stellar param.</em> on the bottom left panel. Then add the maximum time of evolution
+by clicking at <em>N-body</em>. Run orbital evolution (<em>Run orb. evol</em>) and you will be
+transfered automatically to the <em>Orb. Evol</em> panel, where you can see how the orbital parameters
+evolve with time.</p>
+<div class="figure align-default" id="id3">
 <img alt="_images/dynamicalorb.gif" src="_images/dynamicalorb.gif" />
-<p class="caption"><span class="caption-text">Running an <em>orbital evolution</em> with dynamical model.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p class="caption"><span class="caption-text">Running an <em>orbital evolution</em> with Dynamical model.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</div>
+<p>Evaluating the <em>stability of a system</em> means that the orbital parameters have to be examined long-term (e.g 1Myr) and with a time
+step of at least 100 points per orbit. For example, if the inner planet has a period of 200 days, then a time step of 2
+days is required. In case of planet–planet close encounters SyMBA automatically reduces the time step to ensure
+an accurate simulation with high orbital resolution. SyMBA also checks for planet–planet or planet–star collisions or
+planetary ejections and interrupts the integration if they occur.</p>
+<p>A planet is considered lost and the system unstable if, at any time:</p>
+<ul class="simple">
+<li><p>the mutual planet–planet separation is below the sum of their physical radii (assuming Jupiter mean density), i.e., the planets undergo collision.</p></li>
+<li><p>the star–planet separation exceeds two times the initial semimajor axis of the outermost planet, which we deﬁne as planetary ejection.</p></li>
+<li><p>the star–planet separation is below the physical stellar radius (R ≈ 0.03 au), which we consider a collision with the star.</p></li>
+</ul>
+<p>All of these events are associated with large planetary eccentricities leading to crossing orbits, close planetary
+encounters, rapid exchange of energy and angular momentum, and eventually instability. Therefore, these somewhat arbitrary
+stability criteria are efﬁcient to detect unstable conﬁgurations and save CPU time.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="obtaining-the-best-fit-parameters-uncertainties">
+<h2>Obtaining the best fit parameters uncertainties<a class="headerlink" href="#obtaining-the-best-fit-parameters-uncertainties" title="Permalink to this headline"></a></h2>
+<p>In order to perform a parameter distribution analysis, of the best-fit, and estimate their uncertainties,
+you need to couple them with a <em>Markov chain Monte Carlo</em> (<strong>Run MCMC</strong>) sampling scheme using the <em>emcee
+sampler</em>.</p>
+<img alt="_images/mcmc.gif" src="_images/mcmc.gif" />
+<p>First, you need to fill the parameters in <em>MCMC param.</em> (Models param.) on the bottom left panel.</p>
+<ul class="simple">
+<li><p>Burning phase samp. : First steps in the MCMC chain to let the walkers explore the parameter space. (At least 1000)</p></li>
+<li><p>MCMC phase samp. : Represents the total amount of samples. (At least 5000)</p></li>
+<li><p>N threads/CPUs : How many CPUs from your local machine will be used for this progress.</p></li>
+<li><p>Init. Gaussian Ball : How far from the starting point the sampler will start producing samples.</p></li>
+<li><p>N walkers factor : Each walker will produce a different chain.</p></li>
+</ul>
+<p>Then, you need to select between the options in <em>Adopt MCMC param. as</em>, in this tutorial we select the <em>best
+maximum likelihood</em> .</p>
+<p>Now, everything is ready for the MCMC process to start. A different set of parameters are being tested, <strong>starting
+from the best ones that you have already obtained</strong>, and for each set the lnL is being calculated. If a better lnL is
+found then its parameters are counted as errors on the initials (from the best fit).</p>
+<p>For the purposes of this tutorial the values of <em>Burning phase &amp; MCMC phase samples</em> are low, for the process to finish
+at a reasonable time. Sometimes the MCMC process can take from hours to days, depending on the amount of samples and the
+dimensions of the system (N data minus DOF). You can always check the MCMC progress at the <strong>Stdout/Stderr</strong> on the top right
+panel.</p>
+<p>You can also set some bounds on each parameter on the <em>Limits and Priors</em> on the bottom left panel. If you are sure about the
+range of values of a single parameter, that will save you computational time. In this tutorial we set the boundaries empirically.</p>
+<img alt="_images/mcmc1.gif" src="_images/mcmc1.gif" />
+<p>When the process is over, the samples are ready! Then you can press <em>Go to “Make Cornerplot”</em> and you will be
+redirected to the <em>Plot options</em>. There you can customize the cornerplot but also include/exclude parameters from
+being printed. By pressing <em>Make cornerplot</em> the final results are extracted on your local exostriker folder as a pdf
+format.</p>
+<p>In our case the final figure shows the posterior MCMC distribution of the ﬁtted parameters with a dynamical modeling scheme whose orbital
+conﬁguration is edge-on and coplanar. The histogram panels in the figure provide a comparison between the probability density distribution
+of the overall MCMC samples for each fitted parameter. The two-dimensional parameter distribution panels represent all possible parameter
+correlations with respect to the best dynamical ﬁt (starting point), whose position is marked with blue lines. In color red all the samples
+are represented. Also The red 2D contours are constructed from the overall MCMC samples and indicate the 68.3%, 95.5%, and 99.7% conﬁdence
+levels (i.e., 1σ, 2σ, and 3σ).</p>
+<div class="figure align-default" id="id4">
+<img alt="_images/histograms.png" src="_images/histograms.png" />
+<p class="caption"><span class="caption-text">Final histograms.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</div>
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="mcmc">
-<h2>MCMC<a class="headerlink" href="#mcmc" title="Permalink to this headline"></a></h2>
-<p>For parameter distribution analysis and uncertainty esti-
-mates, we couple our MLE ﬁtting algorithm with a Markov
-chain Monte Carlo (MCMC) sampling scheme using the emcee
-sampler (Foreman-Mackey et al. 2013). For all parameters, we
-adopt ﬂat priors (i.e., equal probability of occurrence), and
-we run emcee from the best ﬁt obtained by the MLE. We select
-the 68.3% conﬁdence levels of the posterior MCMC parameter
-distribution as 1σ parameter uncertainties.</p>
-<p>To estimate the parameter uncertainties of our best fits and to
-perform a parameter distribution analysis, we rely on a Markov
-chain Monte Carlo (MCMC) sampling using the emcee sampler
-(Foreman-Mackey et al. 2013)</p>
-</div>
+<div class="section" id="adding-the-transit-data">
+<h1>Adding the Transit data<a class="headerlink" href="#adding-the-transit-data" title="Permalink to this headline"></a></h1>
 </div>
 
 
